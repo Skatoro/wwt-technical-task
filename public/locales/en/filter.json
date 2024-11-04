@@ -1,1 +1,6 @@
-{}
+{
+  "clearAllParameters": "Clear all parameters",
+  "apply": "Apply",
+  "openModal": "Open Modal",
+  "filter": "Filter"
+}
