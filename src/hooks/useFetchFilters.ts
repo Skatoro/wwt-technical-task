@@ -1,16 +1,21 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { FilterItem } from '@api/types/Filter'
+import { FilterItem, FilterType } from '@api/types/Filter'
 
 interface Data {
 	filterItems: FilterItem[]
 }
+
 const fetchFilters = async (): Promise<Data> => {
-	const response = await fetch('/src/temp/filterData.json')
-	if (!response.ok) {
-		throw new Error('Network response was not ok')
-	}
-	return response.json()
+	const response = await import('../temp/filterData.json')
+	const data = response.default
+
+	const filterItems = data.filterItems.map(item => ({
+		...item,
+		type: item.type as FilterType
+	}))
+
+	return { filterItems }
 }
 
 const useFetchFilters = () => {
