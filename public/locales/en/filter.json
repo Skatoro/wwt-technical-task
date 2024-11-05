@@ -1,9 +1,9 @@
 {
-  "clearAllParameters": "Clear all parameters",
-  "apply": "Apply",
-  "openModal": "Open Modal",
-  "filter": "Filter",
-  "doYouWantToApplyNewFilter": "Do you want to apply new filter",
-  "useOldFilter": "Use old filter",
-  "applyNewFilter": "Apply new filter"
+	"clearAllParameters": "Clear all parameters",
+	"apply": "Apply",
+	"openModal": "Open Modal",
+	"filter": "Filter",
+	"doYouWantToApplyNewFilter": "Do you want to apply new filter",
+	"useOldFilter": "Use old filter",
+	"applyNewFilter": "Apply new filter"
 }
