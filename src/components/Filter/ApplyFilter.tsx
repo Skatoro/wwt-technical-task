@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -19,7 +19,7 @@ interface Props {
 	closeAndReset: () => void
 }
 
-export const ApplyFilter: FC<Props> = ({
+const ApplyFilterComponent: FC<Props> = ({
 	isOpen,
 	handleClose,
 	handleApply,
@@ -75,3 +75,4 @@ export const ApplyFilter: FC<Props> = ({
 		</>
 	)
 }
+export const ApplyFilter = memo(ApplyFilterComponent)

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -32,7 +32,7 @@ interface Props {
 	updateTempCheckedItems: (id: string, optionId: string) => void
 }
 
-export const Filter: FC<Props> = ({
+const FilterComponent: FC<Props> = ({
 	isOpen,
 	closeAndReset,
 	handleCheckboxChange,
@@ -172,3 +172,4 @@ export const Filter: FC<Props> = ({
 		</>
 	)
 }
+export const Filter = memo(FilterComponent)
