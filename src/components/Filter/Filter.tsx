@@ -5,7 +5,6 @@ import {
 	Box,
 	Button,
 	Checkbox,
-	CheckboxGroup,
 	Flex,
 	Modal,
 	ModalBody,
@@ -20,27 +19,37 @@ import {
 } from '@chakra-ui/react'
 
 import { FilterChoose } from '@api/types/Filter'
+import { SearchRequestFilter } from '@api/types/SearchRequest/SearchRequestFilter.ts'
 
 interface Props {
 	isOpen: boolean
 	closeAndReset: () => void
-	handleCheckboxChange: (options: string[]) => void
-	tempSelectedFilters: string[]
+	handleCheckboxChange: (id: string, optionId: string) => void
+	checkedItems: SearchRequestFilter
 	filterItems: FilterChoose[]
 	handleApply: () => void
 	handleClear: () => void
+	updateTempCheckedItems: (id: string, optionId: string) => void
 }
 
 export const Filter: FC<Props> = ({
 	isOpen,
 	closeAndReset,
 	handleCheckboxChange,
-	tempSelectedFilters,
 	filterItems,
 	handleApply,
-	handleClear
+	handleClear,
+	checkedItems
 }) => {
 	const { t } = useTranslation('filter')
+
+	const isChecked = (itemId: string, optionId: string) => {
+		const item = checkedItems.find(item => item.id === itemId)
+		return item ? item.optionsIds.includes(optionId) : false
+	}
+	// probably not the best decision since it gets O(n^2) operations each check update change,
+	// but that what I came up with
+
 	return (
 		<>
 			<Modal
@@ -64,70 +73,67 @@ export const Filter: FC<Props> = ({
 
 					<ModalCloseButton />
 					<ModalBody>
-						<CheckboxGroup
-							onChange={handleCheckboxChange}
-							value={tempSelectedFilters}
-						>
-							{filterItems.map(item => (
-								<Stack
-									key={item.id}
-									borderBottom={'2px'}
-									borderColor={'gray.200'}
-									pb={'6'}
-									mb={'6'}
+						{filterItems.map(item => (
+							<Stack
+								key={item.id}
+								borderBottom={'2px'}
+								borderColor={'gray.200'}
+								pb={'6'}
+								mb={'6'}
+							>
+								<Text
+									textStyle={'body-text-3'}
+									lineHeight={'7'}
+									mb={'4'}
 								>
-									<Text
-										textStyle={'body-text-3'}
-										lineHeight={'7'}
-										mb={'4'}
-									>
-										{item.name}
-									</Text>
-									<SimpleGrid
-										columns={{ base: 2, md: 3 }}
-										rowGap={'4'}
-										columnGap={4}
-									>
-										{item.options.map(option => (
-											<Checkbox
-												sx={{
-													'& .chakra-checkbox__control': {
-														background: 'none',
-														borderRadius: '5px',
-														borderWidth: '2px',
-														_hover: {
-															background: 'white'
-														}
-													},
-													'& svg': {
-														color: 'white'
+									{item.name}
+								</Text>
+								<SimpleGrid
+									columns={{ base: 2, md: 3 }}
+									rowGap={'4'}
+									columnGap={4}
+								>
+									{item.options.map(option => (
+										<Checkbox
+											isChecked={isChecked(item.id, option.id)}
+											onChange={() => handleCheckboxChange(item.id, option.id)}
+											sx={{
+												'& .chakra-checkbox__control': {
+													background: 'none',
+													borderRadius: '5px',
+													borderWidth: '2px',
+													_hover: {
+														background: 'white'
 													}
-												}}
-												_checked={{
-													'& .chakra-checkbox__control': {
-														background: 'brand.300',
-														borderWidth: '2px',
-														borderRadius: '5px',
-														_hover: {
-															background: 'brand.300'
-														}
-													},
-													'& svg': {
-														strokeWidth: '5px',
-														color: 'white'
+												},
+												'& svg': {
+													color: 'white'
+												}
+											}}
+											_checked={{
+												'& .chakra-checkbox__control': {
+													background: 'brand.300',
+													borderWidth: '2px',
+													borderRadius: '5px',
+													_hover: {
+														background: 'brand.300'
 													}
-												}}
-												size={'md'}
-												key={option.id}
-												value={option.id}
-											>
-												{option.name}
-											</Checkbox>
-										))}
-									</SimpleGrid>
-								</Stack>
-							))}
-						</CheckboxGroup>
+												},
+												'& svg': {
+													strokeWidth: '5px',
+													color: 'white'
+												}
+											}}
+											size={'md'}
+											key={option.id}
+											value={option.id}
+										>
+											{option.name}
+										</Checkbox>
+									))}
+								</SimpleGrid>
+							</Stack>
+						))}
 					</ModalBody>
 
 					<ModalFooter>
