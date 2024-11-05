@@ -23,7 +23,7 @@ import { FilterChoose } from '@api/types/Filter'
 
 interface Props {
 	isOpen: boolean
-	handleClose: () => void
+	closeAndReset: () => void
 	handleCheckboxChange: (options: string[]) => void
 	tempSelectedFilters: string[]
 	filterItems: FilterChoose[]
@@ -33,7 +33,7 @@ interface Props {
 
 export const Filter: FC<Props> = ({
 	isOpen,
-	handleClose,
+	closeAndReset,
 	handleCheckboxChange,
 	tempSelectedFilters,
 	filterItems,
@@ -46,7 +46,7 @@ export const Filter: FC<Props> = ({
 			<Modal
 				scrollBehavior={'outside'}
 				isOpen={isOpen}
-				onClose={handleClose}
+				onClose={closeAndReset}
 			>
 				<ModalOverlay />
 				<ModalContent
