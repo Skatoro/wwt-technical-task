@@ -73,21 +73,18 @@ export const App = () => {
 				<Flex justifyContent={'center'}>
 					<Button
 						onClick={onFilterOpen}
-						bg={'brand.300'}
-						color={'white'}
-						_hover={{
-							bg: 'brand.100'
-						}}
+						colorScheme="brand"
 					>
 						{t('openModal')}
 					</Button>
 				</Flex>
 				{checkedItems.map(checkedItem => (
-					<div key={checkedItem.id}>
+					<Flex key={checkedItem.id}>
+						<Box textStyle={'button'}>{checkedItem.id}:&nbsp;</Box>
 						{checkedItem.optionsIds.map(optionId => (
-							<div key={optionId}>{optionId}</div>
+							<Box key={optionId}>{optionId}&nbsp;</Box>
 						))}
-					</div>
+					</Flex>
 				))}
 			</Box>
 

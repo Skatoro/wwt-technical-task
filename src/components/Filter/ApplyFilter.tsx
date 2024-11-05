@@ -53,8 +53,21 @@ export const ApplyFilter: FC<Props> = ({
 							alignItems="center"
 							width="100%"
 						>
-							<Button onClick={closeAndReset}>{t('useOldFilter')}</Button>
-							<Button onClick={handleApply}>{t('applyNewFilter')}</Button>
+							<Button
+								onClick={closeAndReset}
+								variant={'outline'}
+								w={'280px'}
+								mr={'8'}
+							>
+								{t('useOldFilter')}
+							</Button>
+							<Button
+								onClick={handleApply}
+								colorScheme="brand"
+								w={'280px'}
+							>
+								{t('applyNewFilter')}
+							</Button>
 						</Flex>
 					</ModalFooter>
 				</ModalContent>

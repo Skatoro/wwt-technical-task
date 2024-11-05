@@ -126,7 +126,6 @@ export const Filter: FC<Props> = ({
 											}}
 											size={'md'}
 											key={option.id}
-											value={option.id}
 										>
 											{option.name}
 										</Checkbox>
@@ -149,23 +148,20 @@ export const Filter: FC<Props> = ({
 								transform="translateX(-50%)"
 							>
 								<Button
-									bg={'brand.300'}
-									color={'white'}
+									colorScheme="brand"
 									textStyle={'button'}
 									mr={3}
 									w={'184px'}
 									h={'64px'}
 									onClick={handleApply}
-									_hover={{
-										bg: 'brand.100'
-									}}
 								>
 									{t('apply')}
 								</Button>
 							</Box>
 							<Button
-								variant="ghost"
+								variant="link"
 								onClick={handleClear}
+								color={'primary.100'}
 							>
 								{t('clearAllParameters')}
 							</Button>
