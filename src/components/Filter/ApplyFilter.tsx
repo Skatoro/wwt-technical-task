@@ -45,8 +45,11 @@ const ApplyFilterComponent: FC<Props> = ({
 						mb={'10'}
 					>
 						{t('doYouWantToApplyNewFilter')}
+						<ModalCloseButton
+							size={'lg'}
+							top={'7'}
+						/>
 					</ModalHeader>
-					<ModalCloseButton />
 					<ModalFooter>
 						<Flex
 							justifyContent="center"

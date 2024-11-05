@@ -69,9 +69,12 @@ const FilterComponent: FC<Props> = ({
 						mb={'10'}
 					>
 						{t('filter')}
+						<ModalCloseButton
+							size={'lg'}
+							top={'7'}
+						/>
 					</ModalHeader>
 
-					<ModalCloseButton />
 					<ModalBody>
 						{filterItems.map(item => (
 							<Stack
